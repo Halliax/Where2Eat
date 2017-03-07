@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.get('/', index.home);
+// app.get('/', index.home);
 
 app.listen(PORT, function() {
   console.log("Running on port: ", PORT);
