@@ -1,12 +1,12 @@
 //from https://gist.github.com/auser/1d55aa3897f15d17caf21dc39b85b663
 
-import React, {PropTypes as T} from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
+// import ReactDOM from 'react-dom'
 
 import {scriptCache} from './scriptCache'
 import GoogleApi from './GoogleApi'
 
-const defaultMapConfig = {}
+// const defaultMapConfig = {}
 const defaultCreateCache = (options) => {
     options = options || {};
     const apiKey = options.apiKey;
@@ -52,7 +52,7 @@ export const wrapper = (options) => (WrappedComponent) => {
             return (
                 <div>
                     <WrappedComponent {...props}/>
-                    <div ref='map'/>
+
                 </div>
             )
         }

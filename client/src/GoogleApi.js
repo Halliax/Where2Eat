@@ -13,16 +13,16 @@ export const GoogleApi = function(opts) {
     const client = opts.client;
     const URL = 'https://maps.googleapis.com/maps/api/js';
 
-    const googleVersion = opts.version || '3';
+    const googleVersion = opts.version || '3.27.12';
 
-    let script = null;
-    let google = window.google || null;
-    let loading = false;
+    // let script = null;
+    // let google = window.google || null;
+    // let loading = false;
     let channel = null;
     let language = null;
     let region = null;
 
-    let onLoadEvents = [];
+    // let onLoadEvents = [];
 
     const url = () => {
         let url = URL;

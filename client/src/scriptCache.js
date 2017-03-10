@@ -26,8 +26,8 @@ export const scriptCache = (function(global) {
             if (!scriptMap.has(key)) {
                 let tag = document.createElement('script');
                 let promise = new Promise((resolve, reject) => {
-                    let resolved = false,
-                        errored = false,
+                    let // resolved = false,
+                        // errored = false,
                         body = document.getElementsByTagName('body')[0];
 
                     tag.type = 'text/javascript';
@@ -35,6 +35,13 @@ export const scriptCache = (function(global) {
 
                     const cbName = `loaderCB${counter++}${Date.now()}`;
                     let cb;
+
+                    const cleanup = () => {
+                        if (global[cbName] && typeof global[cbName] === 'function') {
+                            global[cbName] = null;
+                            delete global[cbName]
+                        }
+                    }
 
                     let handleResult = (state) => {
                         return (evt) => {
@@ -53,13 +60,6 @@ export const scriptCache = (function(global) {
                             stored.loaded = true;
 
                             cleanup();
-                        }
-                    }
-
-                    const cleanup = () => {
-                        if (global[cbName] && typeof global[cbName] === 'function') {
-                            global[cbName] = null;
-                            delete global[cbName]
                         }
                     }
 
