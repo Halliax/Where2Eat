@@ -6,7 +6,7 @@ class Results extends Component {
   render() {
     var places = this.props.places;
     var listItems = places.map(function(item,i){
-      return <li>{item.name}</li>
+      return <li key={item.place_id}>{item.name}</li>
     });
     return (
         <div>

@@ -24,9 +24,6 @@ class PlaceSearch extends Component {
     service.nearbySearch(request, function (results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         places = results;
-        places.forEach(function(place) {
-          place.key = place.place_id;
-        });
       } else {
         places = "Error! No places found.";
       }
