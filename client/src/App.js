@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MapContainer from './MapContainer';
-import PlacesTest from './PlacesTest';
+import PlaceSearch from './PlaceSearch';
+import Results from './Results';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.getMap = this.getMap.bind(this);
+    this.handleSearchResults = this.handleSearchResults.bind(this);
   }
 
   state = {
@@ -22,6 +24,12 @@ class App extends Component {
     });
   }
 
+  handleSearchResults(res) {
+    this.setState({
+      places: res
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -30,7 +38,8 @@ class App extends Component {
           <h2>Where2Eat</h2>
         </div>
         <MapContainer getMap={this.getMap} />
-        <PlacesTest google={window.google} map={this.state.map} places={this.state.places} />
+        <PlaceSearch google={window.google} map={this.state.map} handleSearchResults={this.handleSearchResults} />
+        <Results places={this.state.places} />
       </div>
     );
   }

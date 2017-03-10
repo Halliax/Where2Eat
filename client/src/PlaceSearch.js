@@ -4,18 +4,15 @@ var map;
 var google;
 var service;
 
-class PlacesTest extends Component {
+class PlaceSearch extends Component {
   constructor(props) {
     super(props);
     this.onSearch = this.onSearch.bind(this);
   }
 
-  state = {
-    result: ["results","here"]
-  }
-
   onSearch() {
-    var res;
+    var places;
+    var handleSearchResults = this.props.handleSearchResults;
     map = this.props.map;
     google = this.props.google;
     service = new google.maps.places.PlacesService(map)
@@ -26,26 +23,20 @@ class PlacesTest extends Component {
     };
     service.nearbySearch(request, function (results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        res = results;
+        places = results;
+        places.forEach(function(place) {
+          place.key = place.place_id;
+        });
       } else {
-        res = ['fuck','fuck'];
+        places = "Error! No places found.";
       }
-      console.log(res);
+      handleSearchResults(places);
     });
-    // this.setState({
-    //   result: res
-    // });
+
   }
   render() {
-    var result = this.state.result;
-    var listItems = result.map(function(item,i){
-      return <li>{item}</li>
-    });
     return (
         <div>
-          <ul>
-            {listItems}
-          </ul>
           <input
               type="button"
               value="Search"
@@ -55,4 +46,4 @@ class PlacesTest extends Component {
   }
 }
 
-export default PlacesTest;
+export default PlaceSearch;
