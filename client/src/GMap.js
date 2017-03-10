@@ -31,6 +31,7 @@ export class GMap extends Component {
         zoom: zoom
       })
       this.map = new maps.Map(node, mapConfig);
+      this.props.getMap(this.map);
     }
   }
 

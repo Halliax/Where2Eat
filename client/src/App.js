@@ -2,19 +2,35 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MapContainer from './MapContainer';
+import PlacesTest from './PlacesTest';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.getMap = this.getMap.bind(this);
+  }
+
+  state = {
+    map: null,
+    places: []
+  }
+
+  getMap(m) {
+    this.setState({
+      map: m
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Where2Eat</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <MapContainer/>
+        <MapContainer getMap={this.getMap} />
+        <PlacesTest google={window.google} map={this.state.map} places={this.state.places} />
       </div>
     );
   }

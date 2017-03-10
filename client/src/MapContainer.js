@@ -6,11 +6,11 @@ export class MapContainer extends Component {
   render() {
     const style = {
       width: '100vw',
-      height: '100vh'
-    }
+      height: '400px'
+    };
     return (
       <div style={style}>
-        <GMap google={this.props.google} />
+        <GMap google={this.props.google} getMap={this.props.getMap} />
       </div>
     )
   }
