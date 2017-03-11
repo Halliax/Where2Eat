@@ -8,9 +8,24 @@ class PlaceSearch extends Component {
   constructor(props) {
     super(props);
     this.onSearch = this.onSearch.bind(this);
+    this.updateParams = this.updateParams.bind(this);
   }
 
-  onSearch() {
+  state = {
+      radius: 5,
+      type: ""
+  }
+
+  updateParams(e) {
+    const target = e.target
+    const name = target.name
+    this.setState({
+      [name]: target.value
+    });
+  }
+
+  onSearch(e) {
+    e.preventDefault();
     var places;
     var handleSearchResults = this.props.handleSearchResults;
     map = this.props.map;
@@ -18,8 +33,9 @@ class PlaceSearch extends Component {
     service = new google.maps.places.PlacesService(map)
     var request = {
       location: this.props.location,
-      radius: 5000,
-      types: ['restaurant']
+      radius: this.state.radius * 1609.34,
+      types: ['restaurant'],
+      keyword: this.state.type
     };
     service.nearbySearch(request, function (results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -34,10 +50,21 @@ class PlaceSearch extends Component {
   render() {
     return (
         <div>
-          <input
-              type="button"
-              value="Search"
-              onClick={this.onSearch} />
+          <form onSubmit={this.onSearch}>
+            How far are you willing to go? (in miles) <br />
+            <input
+              type="number"
+              name="radius"
+              value={this.state.radius}
+              onChange={this.updateParams} /> <br /> <br />
+            What type of food do you want? <br />
+            <input
+              type="text"
+              name="type"
+              value={this.state.type}
+              onChange={this.updateParams} /> <br />
+            <input type="submit" value="Search" />
+          </form>
         </div>
     );
   }

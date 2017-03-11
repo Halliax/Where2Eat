@@ -8,26 +8,11 @@ export class Map extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.google !== this.props.google) {
+    if (prevProps.google !== this.props.google || prevProps.location !== this.props.location) {
       this.loadMap();
     }
-    if (prevProps.location !== this.props.location) {
-      this.recenterMap();
-    }
   }
 
-  recenterMap() {
-    const map = this.map;
-    const loc = this.props.location;
-
-    const google = this.props.google;
-    const maps = google.maps;
-
-    if (map) {
-        let center = new maps.LatLng(loc.lat, loc.lng);
-        map.panTo(center);
-    }
-  }
 
   loadMap() {
     if (this.props && this.props.google) {
@@ -47,6 +32,10 @@ export class Map extends Component {
         zoom: zoom
       })
       this.map = new maps.Map(node, mapConfig);
+      new maps.Marker({
+        position: center,
+        map: this.map
+      });
       this.props.onMapLoad(this.map);
     }
   }
