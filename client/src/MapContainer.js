@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleApiComponent from './GoogleApiComponent';
-import GMap from './GMap';
+import Map from './Map';
 
 export class MapContainer extends Component {
   render() {
@@ -10,7 +10,7 @@ export class MapContainer extends Component {
     };
     return (
       <div style={style}>
-        <GMap google={this.props.google} getMap={this.props.getMap} />
+        <Map google={this.props.google} onMapLoad={this.props.onMapLoad} location={this.props.location} zoom={this.props.zoom} />
       </div>
     )
   }

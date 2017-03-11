@@ -17,7 +17,7 @@ class PlaceSearch extends Component {
     google = this.props.google;
     service = new google.maps.places.PlacesService(map)
     var request = {
-      location: {lat:42.360,lng:-71.059},
+      location: this.props.location,
       radius: 5000,
       types: ['restaurant']
     };
@@ -40,6 +40,18 @@ class PlaceSearch extends Component {
               onClick={this.onSearch} />
         </div>
     );
+  }
+}
+
+PlaceSearch.propTypes = {
+  google: React.PropTypes.object,
+  location: React.PropTypes.object
+}
+PlaceSearch.defaultProps = {
+  // Boston by default
+  location: {
+    lat: 42.3601,
+    lng: -71.0589
   }
 }
 
