@@ -4,12 +4,8 @@ import Map from './Map';
 
 export class MapContainer extends Component {
   render() {
-    const style = {
-      width: '100vw',
-      height: '400px'
-    };
     return (
-      <div style={style}>
+      <div>
         <Map google={this.props.google} onMapLoad={this.props.onMapLoad} location={this.props.location} zoom={this.props.zoom} />
       </div>
     )

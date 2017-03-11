@@ -52,8 +52,12 @@ export class Map extends Component {
   }
 
   render() {
+    const style = {
+      width: '100vw',
+      height: '400px'
+    };
     return (
-      <div ref='map'>
+      <div style={style} ref='map'>
         Loading map...
       </div>
     )
