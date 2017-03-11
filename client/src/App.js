@@ -56,7 +56,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Where2Eat</h2>
         </div>
-        <MapContainer google={window.google} onMapLoad={this.handleMapLoad} location={this.state.location} zoom={this.state.zoom} />
+        <MapContainer onMapLoad={this.handleMapLoad} location={this.state.location} zoom={this.state.zoom} />
         <PlaceSearch google={window.google} map={this.state.map} handleSearchResults={this.handleSearchResults} location={this.state.location} />
         <Results places={this.state.places} />
       </div>
