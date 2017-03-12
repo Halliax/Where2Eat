@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var shortid = require('shortid');
 var index = require('./routes/index');
 
 var app = express();
@@ -29,7 +30,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// app.get('/', index.home);
+var Event = require('./models/eventURLModel.js');
+
+app.get('/votes', (req, res) => {
+  var id = shortid.generate();
+  var newEvent = new Event({
+    "_id": id
+  });
+  newEvent.save(function(err, newEvent) {
+    if (err) return console.error(err);
+  });
+  res.json(id);
+});
+
 
 app.listen(PORT, function() {
   console.log("Running on port: ", PORT);
