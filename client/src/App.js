@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
-
-
 
 // class EventUrl extends React.Component {
 
@@ -46,10 +48,7 @@ var NewEvent = React.createClass({
       {
         url: this.random
       })
-
-
   },
-
 
   createEvent: function(e){
     e.preventDefault();
@@ -66,24 +65,39 @@ var NewEvent = React.createClass({
   }
 });
 
+const Home = () => (
+  <div className="App">
+    <div className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <h2>Welcome to React</h2>
+    </div>
+    <p className="App-intro">
+      To get started, edit <code>src/App.js</code> and save to reload.
+    </p>
+    <NewEvent/>
+  </div>
+)
 
+const About = () => (
+  <div>
+    <h2>About</h2>
+  </div>
+)
 
+const Vote = ({ match }) => (
+  <div>
+    <h3>{match.params.id}</h3>
+  </div>
+)
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>/src/App.js</code> and save to reload.
-        </p>
-        <NewEvent/>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <div>
+      <Route exact path="/" component={Home}/>
+      <Route path="/about" component={About}/>
+      <Route path="/vote/:id" component={Vote}/>
+    </div>
+  </Router>
+)
 
 export default App;
