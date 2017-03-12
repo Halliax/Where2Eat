@@ -30,26 +30,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-var Event = require('models/eventURLModel.js');
+var Event = require('./models/eventURLModel.js');
 
 app.get('/votes', (req, res) => {
-  console.log(shortid.generate())
-  res.json([shortid.generate()]);
+  var id = shortid.generate();
+  var newEvent = new Event({
+    "_id": id
+  });
+  newEvent.save(function(err, newEvent) {
+    if (err) return console.error(err);
+  });
+  res.json(id);
 });
 
-// app.post('/postNewEvent', index.postNewEvent);
-
-app.post('/postNewEvent', (req, res) => {
-    console.log("hello" + req.body);
-  // var newEvent = new Event({
-  //   "created_at" : req.body.ingredient,
-  //   "_id": r
-  // });
-  // newIng.save(function(err, newIng) {
-  //   if (err) return console.error(err);
-  // });  
-  res.end();
-});
 
 app.listen(PORT, function() {
   console.log("Running on port: ", PORT);
