@@ -7,6 +7,7 @@
     "body-parser": "^1.16.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "jquery": "^3.1.1",
     "mongoose": "^4.7.8",
     "morgan": "^1.7.0"
   },
@@ -17,7 +18,8 @@
     "karma": "^0.13.19",
     "karma-mocha": "^0.2.1",
     "mocha": "^2.3.4",
-    "supertest": "^1.1.0"
+    "supertest": "^1.1.0",
+    "shortid": "^2.2.8"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd client && npm start\"",

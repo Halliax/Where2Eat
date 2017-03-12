@@ -1,10 +1,9 @@
-// <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlGYNtbgXnfy-Wt4dStomFOTjlpkWLuD0&libraries=places"></script>
 import React, { Component } from 'react';
 var map;
 var google;
 var service;
 
-class PlaceSearch extends Component {
+class PlaceSearchForm extends Component {
   constructor(props) {
     super(props);
     this.onSearch = this.onSearch.bind(this);
@@ -51,13 +50,13 @@ class PlaceSearch extends Component {
     return (
         <div>
           <form onSubmit={this.onSearch}>
-            How far are you willing to go? (in miles) <br />
+            <p>How far are you willing to go? (in miles)</p>
             <input
               type="number"
               name="radius"
               value={this.state.radius}
               onChange={this.updateParams} /> <br /> <br />
-            What type of food do you want? <br />
+            <p>What type of food do you want?</p>
             <input
               type="text"
               name="type"
@@ -70,11 +69,11 @@ class PlaceSearch extends Component {
   }
 }
 
-PlaceSearch.propTypes = {
+PlaceSearchForm.propTypes = {
   google: React.PropTypes.object,
   location: React.PropTypes.object
 }
-PlaceSearch.defaultProps = {
+PlaceSearchForm.defaultProps = {
   // Boston by default
   location: {
     lat: 42.3601,
@@ -82,4 +81,4 @@ PlaceSearch.defaultProps = {
   }
 }
 
-export default PlaceSearch;
+export default PlaceSearchForm;
