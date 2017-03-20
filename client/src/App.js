@@ -5,8 +5,7 @@ import {
 } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import NewEvent from './components/NewEvent';
-import PlacesContainer from './components/PlacesContainer';
+import HomepageContainer from './components/HomepageContainer';
 
 
 const Home = () => (
@@ -15,8 +14,7 @@ const Home = () => (
       <img src={logo} className="App-logo" alt="logo" />
       <h2>Where2Eat</h2>
     </div>
-    <PlacesContainer/>
-    <NewEvent/>
+    <HomepageContainer />
   </div>
 )
 

@@ -39,9 +39,13 @@ class PlaceSearchForm extends Component {
     service.nearbySearch(request, function (results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         places = results;
+        if (places.length >= 10) {
+          places = places.slice(0, 10);
+        }
       } else {
         places = "Error! No places found.";
       }
+
       handleSearchResults(places);
     });
 

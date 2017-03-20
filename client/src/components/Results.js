@@ -5,16 +5,25 @@ class Results extends Component {
 
   render() {
     var places = this.props.places;
-    var listItems = places.map(function(item,i){
-      return <li key={item.place_id}>{item.name}</li>
-    });
-    return (
+    if (places === "Error! No places found.") {
+      return (
         <div>
-          <ul>
-            {listItems}
-          </ul>
+          {places}
         </div>
-    );
+      );
+    }
+    else {
+      var listItems = places.map(function(item,i){
+        return <li key={item.place_id}>{item.name}</li>
+      });
+      return (
+          <div>
+            <ul>
+              {listItems}
+            </ul>
+          </div>
+      );
+    }
   }
 }
 
