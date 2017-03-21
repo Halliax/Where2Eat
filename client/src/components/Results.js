@@ -5,7 +5,7 @@ class Results extends Component {
 
   render() {
     var places = this.props.places;
-    if (places === "Error! No places found.") {
+    if (typeof(places) === "string") {
       return (
         <div>
           {places}

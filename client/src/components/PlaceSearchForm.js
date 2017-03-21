@@ -11,8 +11,29 @@ class PlaceSearchForm extends Component {
   }
 
   state = {
-      radius: 5,
-      type: ""
+      radius: 4,
+      type: "",
+      circle: null
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.map !== this.props.map) {
+      map = this.props.map;
+      google = this.props.google;
+
+      this.setState({
+        circle: new google.maps.Circle({
+                  strokeColor: '#0000FF',
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: '#0000FF',
+                  fillOpacity: 0.35,
+                  map: map,
+                  center: this.props.location,
+                  radius: this.state.radius * 1609.34
+        })
+      });
+    }
   }
 
   updateParams(e) {
@@ -21,6 +42,9 @@ class PlaceSearchForm extends Component {
     this.setState({
       [name]: target.value
     });
+    if (name === "radius") {
+      this.state.circle.set("radius",target.value * 1609.34);
+    }
   }
 
   onSearch(e) {
@@ -58,6 +82,7 @@ class PlaceSearchForm extends Component {
             <input
               type="number"
               name="radius"
+              step="0.1"
               value={this.state.radius}
               onChange={this.updateParams} /> <br /> <br />
             <p>What type of food do you want?</p>

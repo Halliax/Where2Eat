@@ -8,7 +8,7 @@ export class Map extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.google !== this.props.google || prevProps.location !== this.props.location) {
+    if (prevProps.google !== this.props.google || prevProps.location !== this.props.location || prevProps.places !== this.props.places) {
       this.loadMap();
     }
   }
@@ -19,6 +19,7 @@ export class Map extends Component {
       // google is available
       const {google} = this.props;
       const maps = google.maps;
+      const places = this.props.places;
 
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
@@ -36,6 +37,14 @@ export class Map extends Component {
         position: center,
         map: this.map
       });
+      if (typeof(places) === "object") {
+        for (var i = 0; i < places.length; i++) {
+          new maps.Marker({
+            position: places[i].geometry.location,
+            map: this.map
+          });
+        }
+      }
       this.props.onMapLoad(this.map);
     }
   }
@@ -43,7 +52,7 @@ export class Map extends Component {
   render() {
     const style = {
       width: '100vw',
-      height: '400px'
+      height: '50vh'
     };
     return (
       <div style={style} ref='map'>

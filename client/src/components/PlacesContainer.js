@@ -16,7 +16,7 @@ class PlacesContainer extends Component {
       lat: 42.3601,
       lng: -71.0589
     },
-    zoom: 13
+    zoom: 12
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class PlacesContainer extends Component {
   render() {
     return (
         <div>
-          <MapContainer onMapLoad={this.handleMapLoad} location={this.state.location} zoom={this.state.zoom} />
+          <MapContainer onMapLoad={this.handleMapLoad} location={this.state.location} zoom={this.state.zoom} places={this.props.places} />
           <PlaceSearchForm google={window.google} map={this.state.map} handleSearchResults={this.props.handleSearchResults} location={this.state.location} />
           <Results places={this.props.places} />
         </div>
