@@ -11,7 +11,7 @@ class PlaceSearchForm extends Component {
   }
 
   state = {
-      radius: 4,
+      radius: 3,
       type: "",
       circle: null
   }
@@ -30,7 +30,8 @@ class PlaceSearchForm extends Component {
                   fillOpacity: 0.35,
                   map: map,
                   center: this.props.location,
-                  radius: this.state.radius * 1609.34
+                  radius: this.state.radius * 1609.34,
+                  clickable: false
         })
       });
     }
@@ -44,6 +45,8 @@ class PlaceSearchForm extends Component {
     });
     if (name === "radius") {
       this.state.circle.set("radius",target.value * 1609.34);
+      this.props.map.fitBounds(this.state.circle.getBounds());
+      this.props.handleZoomChange(this.props.map.getZoom());
     }
   }
 

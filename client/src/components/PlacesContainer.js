@@ -8,6 +8,7 @@ class PlacesContainer extends Component {
   constructor(props) {
     super(props);
     this.handleMapLoad = this.handleMapLoad.bind(this);
+    this.handleZoomChange = this.handleZoomChange.bind(this);
   }
 
   state = {
@@ -39,11 +40,24 @@ class PlacesContainer extends Component {
     });
   }
 
+  handleZoomChange(z) {
+    this.setState({
+      zoom: z
+    });
+  }
+
   render() {
     return (
         <div>
-          <MapContainer onMapLoad={this.handleMapLoad} location={this.state.location} zoom={this.state.zoom} places={this.props.places} />
-          <PlaceSearchForm google={window.google} map={this.state.map} handleSearchResults={this.props.handleSearchResults} location={this.state.location} />
+          <MapContainer onMapLoad={this.handleMapLoad}
+                        location={this.state.location}
+                        zoom={this.state.zoom}
+                        places={this.props.places} />
+          <PlaceSearchForm google={window.google}
+                        map={this.state.map}
+                        location={this.state.location}
+                        handleSearchResults={this.props.handleSearchResults}
+                        handleZoomChange={this.handleZoomChange} />
           <Results places={this.props.places} />
         </div>
     )

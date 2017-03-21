@@ -30,21 +30,37 @@ export class Map extends Component {
 
       const mapConfig = Object.assign({}, {
         center: center,
-        zoom: zoom
+        zoom: zoom,
+        scrollwheel: false,
+        zoomControl: false,
+        streetViewControl: false,
+        draggable: false,
+        disableDoubleClickZoom: true,
+        clickableIcons: false,
+        minZoom: 5,
+        maxZoom: 15
       })
       this.map = new maps.Map(node, mapConfig);
       new maps.Marker({
         position: center,
-        map: this.map
+        map: this.map,
+        clickable: false
       });
       if (typeof(places) === "object") {
         for (var i = 0; i < places.length; i++) {
           new maps.Marker({
             position: places[i].geometry.location,
-            map: this.map
+            map: this.map,
+            clickable: false
           });
         }
       }
+      var _this = this;
+      maps.event.addDomListener(window, "resize", function() {
+        var center = _this.map.getCenter();
+        maps.event.trigger(_this.map, "resize");
+        _this.map.setCenter(center);
+      });
       this.props.onMapLoad(this.map);
     }
   }
@@ -52,7 +68,7 @@ export class Map extends Component {
   render() {
     const style = {
       width: '100vw',
-      height: '50vh'
+      height: '60vh'
     };
     return (
       <div style={style} ref='map'>
@@ -68,7 +84,7 @@ Map.propTypes = {
   location: React.PropTypes.object
 }
 Map.defaultProps = {
-  zoom: 13,
+  zoom: 12,
   // Boston by default
   location: {
     lat: 42.3601,
