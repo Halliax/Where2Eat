@@ -4,9 +4,10 @@ import EventUrl from './EventUrl';
 
 var NewEvent = React.createClass({
   //The component for the add item form
-  propTypes: {
 
-  },
+  // propTypes: {
+  //   places: React.PropTypes.Array,
+  // },
 
 
   getInitialState: function(){
@@ -15,15 +16,34 @@ var NewEvent = React.createClass({
     }
   },
 
-  generateId: function(){
+  addPlaces: function(){
+      var placeNames = this.props.places.map(function(place){
+        return place.name;
+      });
+      var data = {'id': this.state.random, 'places': placeNames};
+      $.ajax({
+      type: 'POST',
+      url: '/votes',
+      data: data,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        console.log('Successfully added');
+      },
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }
+    });
+  },
+
+  generateId: function(){   
       $.ajax({
       url: '/votes',
       dataType: 'json',
       cache: false,
       success: function(data) {
         this.setState({random: data});
-        // console.log(this.state)
-        // this.createDbEntry(); // Notice this
+        this.addPlaces();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -34,7 +54,6 @@ var NewEvent = React.createClass({
   createEvent: function(e){
     e.preventDefault();
     this.generateId();
-
    },
 
   render: function(){
