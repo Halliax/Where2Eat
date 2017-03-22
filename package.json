@@ -7,10 +7,17 @@
     "body-parser": "^1.16.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "google-maps-react": "^1.0.19",
     "jquery": "^3.1.1",
     "mongoose": "^4.7.8",
-    "morgan": "^1.7.0"
-  },
+    "morgan": "^1.7.0",
+    "nodemon": "^1.11.0",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-router-dom": "^4.0.0",
+    "react-scripts": "0.9.3",
+    "shortid": "^2.2.8"
+},
   "devDependencies": {
     "concurrently": "^3.4.0",
     "chai": "^3.4.1",
@@ -18,12 +25,12 @@
     "karma": "^0.13.19",
     "karma-mocha": "^0.2.1",
     "mocha": "^2.3.4",
-    "supertest": "^1.1.0",
-    "shortid": "^2.2.8"
+    "supertest": "^1.1.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"cd client && npm start\"",
+    "start": "npm run build && npm run server",
     "server": "nodemon server.js",
+    "build": "cd client && react-scripts build",
     "jshint": "jshint --exclude-path ./.gitignore . || exit 0",
     "mocha": "./node_modules/mocha/bin/mocha tests/server --recursive || exit 0",
     "cover-mocha": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha tests/server -- --recursive -R spec || exit 0",
