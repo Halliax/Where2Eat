@@ -41,7 +41,9 @@ var NewEvent = React.createClass({
     return(
       <div>
       <form id="newEvent" onSubmit={this.createEvent}>
-        <input type="submit" value="New Event"/>
+        <div className="form-group">
+          <button type="submit" className="btn btn-default">Create Event</button>
+        </div>
       </form>
         <EventUrl newUrl={this.state.random}/>
       </div>
