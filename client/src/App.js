@@ -4,6 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import logo from './burger.svg';
+import './css/bootstrap.css';
 import './App.css';
 import HomepageContainer from './components/HomepageContainer';
 

@@ -81,20 +81,28 @@ class PlaceSearchForm extends Component {
     return (
         <div>
           <form onSubmit={this.onSearch}>
-            <p>How far are you willing to go? (in miles)</p>
-            <input
-              type="number"
-              name="radius"
-              step="0.1"
-              value={this.state.radius}
-              onChange={this.updateParams} /> <br /> <br />
-            <p>What type of food do you want?</p>
-            <input
-              type="text"
-              name="type"
-              value={this.state.type}
-              onChange={this.updateParams} /> <br />
-            <input type="submit" value="Search" />
+            <div className="form-group">
+              <label htmlFor="distanceInput">How far are you willing to go? (in miles)</label>
+              <input
+                type="number"
+                className="form-control"
+                id="distanceInput"
+                name="radius"
+                step="0.1"
+                value={this.state.radius}
+                onChange={this.updateParams} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="keywordInput">What type of food do you want?</label>
+              <input
+                type="text"
+                className="form-control"
+                id="keywordInput"
+                name="type"
+                value={this.state.type}
+                onChange={this.updateParams} />
+            </div>
+            <button type="submit" className="btn btn-default">Search</button>
           </form>
         </div>
     );
