@@ -30,12 +30,19 @@ const Vote = ({ match }) => (
   </div>
 )
 
+const Results = ({ match }) => (
+  <div>
+    <h3>Get ready! The group is going to {match.params.id}</h3>
+  </div>
+)
+
 const App = () => (
   <Router>
     <div>
       <Route exact path="/" component={Home}/>
       <Route path="/about" component={About}/>
       <Route path="/vote/:id" component={Vote}/>
+      <Route path="/results/:id" component={Results}/>
     </div>
   </Router>
 )
