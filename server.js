@@ -73,6 +73,10 @@ app.get('/votes/id', (req, res) => {
   // res.json(id);
 });
 
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+});
+
 app.listen(PORT, function() {
   console.log("Running on port: ", PORT);
 });
