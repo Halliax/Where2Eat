@@ -55,6 +55,24 @@ app.post('/votes', (req,res) => {
   });
 });
 
+app.get('/votes/id', (req, res) => {
+  console.log(req.query.id)
+  Event.findOne({'_id':req.query.id}, 'places', function(err, places){
+    res.json(places)
+    if(err){
+        console.log("Something wrong when updating data!");
+    }
+  });
+  // var newEvent = new Event({
+  //   "_id": id,
+  //   "places": []
+  // });
+  // newEvent.save(function(err, newEvent) {
+  //   if (err) return console.error(err);
+  // });
+  // res.json(id);
+});
+
 app.listen(PORT, function() {
   console.log("Running on port: ", PORT);
 });
