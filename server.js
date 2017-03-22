@@ -35,7 +35,8 @@ var Event = require('./models/eventURLModel.js');
 app.get('/votes', (req, res) => {
   var id = shortid.generate();
   var newEvent = new Event({
-    "_id": id
+    "_id": id,
+    "places": []
   });
   newEvent.save(function(err, newEvent) {
     if (err) return console.error(err);
@@ -43,6 +44,34 @@ app.get('/votes', (req, res) => {
   res.json(id);
 });
 
+app.post('/votes', (req,res) => {
+  var places = req.body['places[]'];
+  console.log(req.body.id)
+  Event.findOneAndUpdate({'_id': req.body.id}, {$set:{'places':places}}, function(err, doc){
+    if(err){
+        console.log("Something wrong when updating data!");
+    }
+    console.log(doc);
+  });
+});
+
+app.get('/votes/id', (req, res) => {
+  console.log(req.query.id)
+  Event.findOne({'_id':req.query.id}, 'places', function(err, places){
+    res.json(places)
+    if(err){
+        console.log("Something wrong when updating data!");
+    }
+  });
+  // var newEvent = new Event({
+  //   "_id": id,
+  //   "places": []
+  // });
+  // newEvent.save(function(err, newEvent) {
+  //   if (err) return console.error(err);
+  // });
+  // res.json(id);
+});
 
 app.listen(PORT, function() {
   console.log("Running on port: ", PORT);

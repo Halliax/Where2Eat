@@ -11,8 +11,30 @@ class PlaceSearchForm extends Component {
   }
 
   state = {
-      radius: 5,
-      type: ""
+      radius: 3,
+      type: "",
+      circle: null
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.map !== this.props.map) {
+      map = this.props.map;
+      google = this.props.google;
+
+      this.setState({
+        circle: new google.maps.Circle({
+                  strokeColor: '#0000FF',
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: '#0000FF',
+                  fillOpacity: 0.35,
+                  map: map,
+                  center: this.props.location,
+                  radius: this.state.radius * 1609.34,
+                  clickable: false
+        })
+      });
+    }
   }
 
   updateParams(e) {
@@ -21,6 +43,11 @@ class PlaceSearchForm extends Component {
     this.setState({
       [name]: target.value
     });
+    if (name === "radius") {
+      this.state.circle.set("radius",target.value * 1609.34);
+      this.props.map.fitBounds(this.state.circle.getBounds());
+      this.props.handleZoomChange(this.props.map.getZoom());
+    }
   }
 
   onSearch(e) {
@@ -54,19 +81,28 @@ class PlaceSearchForm extends Component {
     return (
         <div>
           <form onSubmit={this.onSearch}>
-            <p>How far are you willing to go? (in miles)</p>
-            <input
-              type="number"
-              name="radius"
-              value={this.state.radius}
-              onChange={this.updateParams} /> <br /> <br />
-            <p>What type of food do you want?</p>
-            <input
-              type="text"
-              name="type"
-              value={this.state.type}
-              onChange={this.updateParams} /> <br />
-            <input type="submit" value="Search" />
+            <div className="form-group">
+              <label htmlFor="distanceInput">How far are you willing to go? (in miles)</label>
+              <input
+                type="number"
+                className="form-control"
+                id="distanceInput"
+                name="radius"
+                step="0.1"
+                value={this.state.radius}
+                onChange={this.updateParams} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="keywordInput">What type of food do you want?</label>
+              <input
+                type="text"
+                className="form-control"
+                id="keywordInput"
+                name="type"
+                value={this.state.type}
+                onChange={this.updateParams} />
+            </div>
+            <button type="submit" className="btn btn-default">Search</button>
           </form>
         </div>
     );

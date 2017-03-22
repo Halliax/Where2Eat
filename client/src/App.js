@@ -3,10 +3,11 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import logo from './logo.svg';
+import logo from './burger.svg';
+import './css/bootstrap.css';
 import './App.css';
 import HomepageContainer from './components/HomepageContainer';
-
+import VotepageContainer from './components/VotepageContainer';
 
 const Home = () => (
   <div className="App">
@@ -26,7 +27,7 @@ const About = () => (
 
 const Vote = ({ match }) => (
   <div>
-    <h3>{match.params.id}</h3>
+    <VotepageContainer eventId={match.params.id} />
   </div>
 )
 

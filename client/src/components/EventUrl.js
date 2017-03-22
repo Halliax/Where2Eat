@@ -19,7 +19,7 @@ var EventUrl = React.createClass({
     else {
       return (
         <p className="EventURL">
-        Click the button to make an event.
+        
         </p>
       );
     }
